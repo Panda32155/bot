@@ -3,3 +3,4 @@ requests
 mplfinance
 python-binance
 numpy
+flask
