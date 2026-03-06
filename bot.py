@@ -6,15 +6,20 @@ from binance import ThreadedWebsocketManager
 from binance.client import Client
 from flask import Flask
 import threading
+from bot import start_bot
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Bot is running ✅"
+    return "Bot running"
 
-def run_web():
-    app.run(host="0.0.0.0", port=10000)
+def run_bot():
+    start_bot()
+
+threading.Thread(target=run_bot).start()
+
+app.run(host="0.0.0.0", port=10000)
 
 # запускаємо веб сервер у окремому потоці
 threading.Thread(target=run_web).start()
@@ -185,4 +190,5 @@ send_initial_chart()  # стартовий графік перед WebSocket
 twm = ThreadedWebsocketManager()
 twm.start()
 twm.start_kline_socket(callback=handle_socket, symbol=SYMBOL, interval=Client.KLINE_INTERVAL_1HOUR)
+
 twm.join()
