@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Bot running ✅"
+    return "Bot running ✅22"
 
 def run_bot():
     start_bot()
@@ -15,4 +15,5 @@ def run_bot():
 threading.Thread(target=run_bot).start()
 
 if __name__ == "__main__":
+
     app.run(host="0.0.0.0", port=10000)
